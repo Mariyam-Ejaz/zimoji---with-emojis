@@ -14,7 +14,7 @@ function Footer() {
       </div>
       <a href="https://zimogroup.org" target="_blank">
         <img
-          className="h-[30.4px] lg:h-[37px] 3xl:h-[57px] w-[96px] lg:w-[110px] 3xl:w-[162px]"
+          className="h-[30.4px] lg:h-[34px] 3xl:h-[57px] w-[89px] lg:w-[100px] 3xl:w-[162px]"
           src="/assets/ZIMO OFFICIAL LICENSED.svg"
           alt="zimo group"
         />

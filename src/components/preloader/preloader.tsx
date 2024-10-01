@@ -7,6 +7,9 @@ import { RootState, store } from "@/store";
 import { Provider, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { HOLDING_TABS } from "./lib";
+import RandomEmojis from "../emojis/random-emojis";
+import EmojiSlightMovement from "../emojis/emoji-slight-movement";
+import EmojiDiagonal from "../emojis/emoji-diagonal";
 
 export default function Preloader() {
   // Use the custom hook to prevent the context menu
@@ -16,7 +19,7 @@ export default function Preloader() {
   const { tab } = useSelector((state: RootState) => state.holding);
 
 
-  // Effect to play video when tab is .vid
+  // Effect to play video 
   useEffect(() => {
     console.log(tab);
     if (tab === HOLDING_TABS.zimojilogo) {
@@ -32,8 +35,8 @@ export default function Preloader() {
 
   return (
 <>
-      <div className="flex flex-col justify-between min-h-dvh bg-black text-white">
-        {isVideoVisible && (
+      <div className="flex flex-col justify-between min-h-dvh bg-black text-white ">
+        {/* {isVideoVisible && (
           <video
             ref={videoRef}
             src="/assets/ZIMOJI Temp Video.mp4" 
@@ -43,10 +46,12 @@ export default function Preloader() {
             muted
             playsInline
           />
-        )}
+        )} */}
       
         <Header />
         {/* <RandomEmojis/> */}
+        {/* <EmojiSlightMovement/> */}
+        <EmojiDiagonal/>
         <ContentMapping  />
         <Footer />
       </div>

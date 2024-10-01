@@ -4,27 +4,29 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchVisitor = createAsyncThunk("get/visitor", async () => {
   try {
     const location = await getUserLocation();
-    const visitor = location ? await getVisitor(location.latitude, location.longitude): "";
-    localStorage.setItem("visitor_data", JSON.stringify(visitor.visitor_data));
-    return visitor.visitor_data;
-  } catch (e) {
-    if (e == "User denied Geolocation") {
+    if (location) {
+      const visitor = await getVisitor(location.latitude, location.longitude);
+      localStorage.setItem("visitor_data", JSON.stringify(visitor.visitor_data));
+      return visitor.visitor_data;
+    }
+  } catch (e: any) {
+    if (e.message == "User denied Geolocation") {
       const visitor = await getVisitor();
       localStorage.setItem(
         "visitor_data",
         JSON.stringify(visitor.visitor_data)
       );
+
       return visitor.visitor_data;
     }
 
-    // if (parseInt(e.response.data.visitor_data) === 451) {
-    //   // console.log(e.response.data.visitor_data);
-    //   const res = {
-    //     data: e.response.data.visitor_data,
-    //     error: "Visitor not allowed",
-    //   };
-    //   throw Error(JSON.stringify(res));
-    // }
+    if (parseInt(e.response.status) === 451) {
+      const res = {
+        data: e.response.data.visitor_data,
+        error: "Visitor not allowed",
+      };
+      throw Error(JSON.stringify(res));
+    }
   }
 });
 
@@ -46,7 +48,7 @@ export const visitorSlice = createSlice({
   reducers: {
     loadVisitor: (state) => {
       state.status = "success";
-      state.data = JSON.parse(localStorage.getItem("visitor_data")?? "");
+      state.data = JSON.parse(localStorage.getItem("visitor_data") || "");
     },
   },
   extraReducers(builder) {
@@ -62,7 +64,7 @@ export const visitorSlice = createSlice({
         state.status = "error";
         try {
           console.log("action.error", action.error);
-          const message = JSON.parse(action.error.name ?? "");
+          const message = JSON.parse(action.error.message || "");
           state.data = message.data;
           if (message.error === "Visitor not allowed") {
             state.isAllowed = false;

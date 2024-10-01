@@ -88,22 +88,53 @@
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: -1;
-  transition: transform 0.3s ease, z-index 0.3s ease;
 
   &.active {
+    /* Trigger the springy scale-rotate animation */
+    animation: scale-up 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards, 
+               hold 2s ease 0.9s forwards, 
+               scale-down 0.37s cubic-bezier(0.68, 1.5, 0.27, 1.55) forwards 2.7s;
+    opacity: 1;
     z-index: 18;
-    animation: scale-rotate 3s ease-out; // Scale and rotate effect on activation
   }
 }
 
-@keyframes scale-rotate {
+/* Extra bouncy scale-up animation */
+@keyframes scale-up {
   0% {
     transform: translate(-50%, -50%) scale(1) rotate(0deg);
   }
-  50% {
-    transform: translate(-50%, -50%) scale(6) rotate(180deg);
+  80% {
+    transform: translate(-50%, -50%) scale(8.5) rotate(360deg);
+    /* Bounce up while maintaining rotation */
   }
   100% {
-    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+    transform: translate(-50%, -50%) scale(6) rotate(360deg);
+    /* Final settled scale, keeping rotation at 360 degrees */
+  }
+}
+
+/* Hold at the scaled-up state for 2 seconds */
+@keyframes hold {
+  0% {
+    transform: translate(-50%, -50%) scale(6) rotate(360deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(6) rotate(360deg);
+  }
+}
+
+/* Springy scale-down animation */
+@keyframes scale-down {
+  0% {
+    transform: translate(-50%, -50%) scale(6) rotate(360deg);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+    /* Overshoot back with a bounce */
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    /* Return to original scale and rotation */
   }
 }

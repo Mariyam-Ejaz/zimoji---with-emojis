@@ -7,18 +7,18 @@ function Header() {
   const { data } = useSelector((state: RootState) => state.visitor);
 
   return (
-    <header className="flex justify-end gap-x-8 lg:gap-x-9 3xl:gap-x-14 container__padding container__padding__y z-50">
+    <header className="flex justify-end gap-x-8 3xl:gap-x-14 container__padding container__padding__y z-50">
 
 
       {data?.countryCode ? (
         <>
         <img
         src="/assets/Scan Icon ZIMOJI W.svg"
-        className="h-[35px] lg:h-[36px] 3xl:h-[55px] fill-black color-black"
+        className="h-[27px] lg:h-[35px] 3xl:h-[50px] fill-black color-black"
         alt=""
       />
       <img
-          className="h-[35px] lg:h-[36px] 3xl:h-[55px] w-auto"
+          className="h-[27px] lg:h-[35px] 3xl:h-[50px] w-auto"
           src={data.country.app_icon}
           alt="country"
         />
