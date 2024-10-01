@@ -4,6 +4,7 @@ import {store } from "@/store";
 import { Provider} from "react-redux";
 import Preloader from "@/components/preloader/preloader";
 import GetVisitor from "@/components/globals/GetVisitor";
+import EmojiDiagonal from "@/components/emojis/emoji-diagonal";
 
 export default function Home() {
   // Use the custom hook to prevent the context menu
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <Provider store={store}>
       <GetVisitor/>
+      <EmojiDiagonal/>
       <Preloader/>
     </Provider>
   );
