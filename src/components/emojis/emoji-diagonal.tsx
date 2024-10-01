@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef, memo } from 'react';  
 import { extractEmojiUrls } from '@/utils/emoji-extractor';
-import { AnimatePresence, motion } from 'framer-motion';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { HOLDING_TABS } from '../preloader/lib';
 import PoissonDiskSampling from 'poisson-disk-sampling';
 import { getSamplingArea } from '@/utils/emoji-utils';
 import { debounce } from '@/lib/helpers';
+import { motion } from 'framer-motion';
 
 // Constants
 const EDGE_MARGIN = 6;
@@ -174,20 +174,37 @@ const EmojiDiagonal = memo(() => {
         }}
       >
         {emojis.slice(0, visibleEmojiCount).map((emoji, index) => (
-          <img
-            key={index}
-            src={emoji.src}
-            alt={`emoji-${index}`}
-            className={`emoji absolute ${selectedEmojiIndex === index ? 'active' : ''} ${hasMoved ? 'moving' : ''}`}
-            style={{
-              top: `${emoji.top}px`,
-              left: `${emoji.left}px`,
-              width: `${emojiSize}px`,
-              height: 'auto',
-              zIndex: activeAnimation === index ? 18 : 0,
-              overflow: 'hidden'
-            }}
-          />
+          <motion.img
+                      key={index}
+                      src={emoji.src}
+                      alt={`emoji-${index}`}
+                      className={`absolute z-[-1] ${hasMoved ? 'moving' : ''}`}
+                      style={{
+                        top: `${emoji.top}px`,
+                        left: `${emoji.left}px`,
+                        width: `${emojiSize}px`,
+                        height: 'auto',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: activeAnimation === index ? 18 : 0,
+                        willChange: 'transform, opacity',
+                      }}
+                      animate={{
+                        scale: selectedEmojiIndex === index ? 6 : 1,
+                        rotate: selectedEmojiIndex === index ? 360 : 0,
+                        opacity: visibleEmojiCount > 0 ? 1 : 0,
+                      }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 100,
+                        damping: 10,
+                        duration: 0.5,
+                      }}
+                      onAnimationComplete={() => {
+                        if (activeAnimation === index) {
+                          setActiveAnimation(null);
+                        }
+                      }}
+                    />
         ))}
       </div>
       
