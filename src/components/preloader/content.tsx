@@ -18,7 +18,7 @@ function Content() {
         setTab((prev) => prev + 1);
         console.log(tab);
       }
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);
