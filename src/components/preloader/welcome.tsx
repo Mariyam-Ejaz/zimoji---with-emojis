@@ -11,7 +11,7 @@ function Welcome() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(changeTab(HOLDING_TABS.zimojilogo));
-    }, 6000);
+    }, 8000);
 
     return () => {
       clearTimeout(timer);
