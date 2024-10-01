@@ -487,7 +487,7 @@ const EmojiDiagonal = memo(() => {
         setMinDistance(150);
         setEmojiSize(50);
       } else {
-        setMinDistance(80);
+        setMinDistance(100);
         setEmojiSize(40);
       }
       setRefreshKey((prevKey) => prevKey + 1);
@@ -509,7 +509,7 @@ const EmojiDiagonal = memo(() => {
     const p = new PoissonDiskSampling({
       shape: [areaWidth, areaHeight],
       minDistance,
-      maxDistance: minDistance + (window.innerWidth < 1000 ? 15 : 20),
+      maxDistance: minDistance + (window.innerWidth < 1000 ? 10 : 20),
       tries: 18,
     });
 
