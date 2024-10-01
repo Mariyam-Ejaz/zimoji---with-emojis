@@ -35,7 +35,7 @@ export default function Preloader() {
 
   return (
 <>
-      <div className="flex flex-col justify-between min-h-dvh bg-black text-white ">
+      <div className="flex flex-col justify-between min-h-dvh bg-black text-white overflow-hidden">
         {/* {isVideoVisible && (
           <video
             ref={videoRef}
