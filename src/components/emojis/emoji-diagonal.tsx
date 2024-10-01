@@ -544,7 +544,11 @@ const EmojiDiagonal = memo(() => {
         const animationInterval = setInterval(() => {
           const randomIndex = Math.floor(Math.random() * emojis.length);
           setSelectedEmojiIndex(randomIndex);
-          setActiveAnimation(randomIndex);
+          // Add a delay before setting the zIndex to simulate a staggered effect
+        setTimeout(() => {
+            setActiveAnimation(randomIndex);
+          }, 1000); // Delay before setting zIndex
+  
 
           setTimeout(() => {
             setSelectedEmojiIndex(null);
