@@ -1,0 +1,109 @@
+/**
+* FOR COMMON FONT SIZES, SPACINGS ETC...
+*/
+
+.container__padding {
+  @apply px-2 lg:px-4 2xl:px-6 3xl:px-10;
+}
+.container__padding__y {
+  @apply py-2 lg:py-4 2xl:py-6  3xl:py-10;
+}
+.container__padding__bottom {
+  @apply pb-2 lg:pb-4 2xl:pb-6  3xl:pb-10;
+}
+
+.cards__section__container__padding__x {
+  @apply px-4 lg:px-[35px] xl:px-[60.71px] 2xl:px-[65.38px] 3xl:px-[85px];
+}
+
+.cards__carousel__container__padding__x {
+  @apply pl-4 lg:pl-[35px] xl:pl-[60.71px] 2xl:pl-[65.38px] 3xl:pl-[85px] pr-0 lg:pr-[27px] xl:mr-[-120px] 2xl:mr-0 2xl:pr-[12px] 3xl:pr-[43px] 4xl:mr-[-48px];
+}
+
+.cards__section__container__padding__y {
+  @apply py-4 lg:pt-[21.11px] lg:pb-[61.11px] xl:pt-[27.14px] xl:pb-[78.57px] 2xl:pt-[29.23px] 2xl:pb-[84.62px] 3xl:pt-[38px] 3xl:pb-[110px];
+}
+
+.container__padding__sidemenu__y {
+  @apply pt-2 lg:pt-4 2xl:pt-6  3xl:pt-10 pb-1 2xl:pb-3;
+}
+
+.sidemenu_font_size {
+  @apply text-base_text_smallest lg:text-base_text_lg 3xl:text-base_text_3xl;
+}
+
+.base__font__size {
+  @apply text-[6.67px] lg:text-[6.5px] xl:text-[9.23px] 3xl:text-[12px];
+}
+
+.font__size__18__3xl {
+  @apply text-[13.85px] 3xl:text-[18px];
+}
+
+.sidemenu_line_spacing {
+  @apply space-y-[11.56px] lg:space-y-[1.9dvh] 3xl:space-y-[20.8px];
+}
+
+.tracking_1_5 {
+  @apply tracking-[2.5px];
+}
+.tracking_2 {
+  @apply tracking-[3px];
+}
+
+.opacity_hover_animation {
+  @apply opacity-50 hover:opacity-100 duration-300 transition-all cursor-pointer;
+}
+
+.separator__width {
+  @apply border-r-[2.3px];
+}
+
+
+
+.emoji-container {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  // &.animate-container {
+  //   animation: move-diagonally 20s linear infinite; // Continuous diagonal movement
+  // }
+}
+
+@keyframes move-diagonally {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, -100%);
+  }
+}
+
+.emoji {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: transform 0.3s ease, z-index 0.3s ease;
+
+  &.active {
+    z-index: 18;
+    animation: scale-rotate 3s ease-out; // Scale and rotate effect on activation
+  }
+}
+
+@keyframes scale-rotate {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(6) rotate(180deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+  }
+}

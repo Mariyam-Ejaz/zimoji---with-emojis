@@ -1,0 +1,391 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@import "@/styles/utils.scss";
+@import "@/styles/holding.scss";
+
+html {
+  scroll-behavior: smooth;
+  user-select: none;
+}
+img {
+  -webkit-user-drag: none;
+}
+
+// Additional global styles based on themes
+body {
+  @apply transition-colors duration-300; // Smooth transition
+}
+
+
+.scroll__animation {
+  @apply flex flex-col gap-4 items-center;
+
+  // $colorBg: #ffffff00;
+  $colorBg: #f4ecec00;
+  $colorOutline: #00000000;
+  $colorOutlineFade: #cccccc00;
+
+  // $widthMouse: 30px;
+  $heightMouse: 50px;
+  $borderMouse: 4px;
+
+  $posMouse: 6px;
+  $posText: 2px;
+
+  $sizeTrackball: 6px;
+  $posTrackball: 12px;
+  $shrinkTrackball: 0.4;
+
+  $animDuration: 10s;
+
+  @mixin bgGradient {
+    background: $colorOutlineFade
+      linear-gradient(
+        transparent 0%,
+        transparent 50%,
+        $colorOutline 50%,
+        $colorOutline 100%
+      );
+  }
+
+  p {
+    font-family: "LATO", sans-serif;
+    letter-spacing: 12px;
+    text-indent: 12px;
+    color: $colorOutline;
+    font-size: 10px;
+    animation: colorText $animDuration ease-out infinite,
+      nudgeText $animDuration ease-out infinite;
+  }
+
+  .mouse {
+    @include bgGradient;
+    position: relative;
+    // width: $widthMouse;
+    height: $heightMouse;
+    border-radius: 100px;
+    background-size: 100% 200%;
+    animation: colorSlide $animDuration linear infinite,
+      nudgeMouse $animDuration ease-out infinite;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+    &:before {
+      // width: $widthMouse - $borderMouse;
+      height: $heightMouse - $borderMouse;
+      background-color: $colorBg;
+      border-radius: 100px;
+    }
+    &:after {
+      background-color: #fff; // $colorOutline
+      width: $sizeTrackball;
+      height: $sizeTrackball;
+      border-radius: 100%;
+      animation: trackBallSlide $animDuration linear infinite;
+    }
+  }
+
+  @keyframes colorSlide {
+    0% {
+      background-position: 0% 100%;
+    }
+    20% {
+      background-position: 0% 0%;
+    }
+    21% {
+      background-color: $colorOutlineFade;
+    }
+    29.99% {
+      background-color: $colorOutline;
+      background-position: 0% 0%;
+    }
+    30% {
+      background-color: $colorOutlineFade;
+      background-position: 0% 100%;
+    }
+    50% {
+      background-position: 0% 0%;
+    }
+    51% {
+      background-color: $colorOutlineFade;
+    }
+    59% {
+      background-color: $colorOutline;
+      background-position: 0% 0%;
+    }
+    60% {
+      background-color: $colorOutlineFade;
+      background-position: 0% 100%;
+    }
+    80% {
+      background-position: 0% 0%;
+    }
+    81% {
+      background-color: $colorOutlineFade;
+    }
+    90%,
+    100% {
+      background-color: $colorOutline;
+    }
+  }
+
+  @keyframes trackBallSlide {
+    0% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+    6% {
+      opacity: 1;
+      transform: scale(0.9) translateY($posTrackball/4);
+    }
+    14% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY($posTrackball * 2);
+    }
+    15%,
+    19% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY(-$posTrackball);
+    }
+    28%,
+    29.99% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+    30% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+    36% {
+      opacity: 1;
+      transform: scale(0.9) translateY($posTrackball/4);
+    }
+    44% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY($posTrackball * 2);
+    }
+    45%,
+    49% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY(-$posTrackball);
+    }
+    58%,
+    59.99% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+    66% {
+      opacity: 1;
+      transform: scale(0.9) translateY($posTrackball/4);
+    }
+    74% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY($posTrackball * 2);
+    }
+    75%,
+    79% {
+      opacity: 0;
+      transform: scale($shrinkTrackball) translateY(-$posTrackball);
+    }
+    88%,
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(-$posTrackball);
+    }
+  }
+
+  @keyframes nudgeMouse {
+    0% {
+      transform: translateY(0);
+    }
+    20% {
+      transform: translateY($posMouse);
+    }
+    30% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY($posMouse);
+    }
+    60% {
+      transform: translateY(0);
+    }
+    80% {
+      transform: translateY($posMouse);
+    }
+    90% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes nudgeText {
+    0% {
+      transform: translateY(0);
+    }
+    20% {
+      transform: translateY($posText);
+    }
+    30% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY($posText);
+    }
+    60% {
+      transform: translateY(0);
+    }
+    80% {
+      transform: translateY($posText);
+    }
+    90% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes colorText {
+    21% {
+      color: $colorOutlineFade;
+    }
+    30% {
+      color: $colorOutline;
+    }
+    51% {
+      color: $colorOutlineFade;
+    }
+    60% {
+      color: $colorOutline;
+    }
+    81% {
+      color: $colorOutlineFade;
+    }
+    90% {
+      color: $colorOutline;
+    }
+  }
+}
+
+.agent-marquee-container {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 1) 16%,
+    rgba(255, 255, 255, 1) 84%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.audio__wave__animation__wrapper {
+  @apply cursor-pointer;
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    height: 15px;
+    list-style: none;
+    width: max-content;
+    @apply gap-0.5 3xl:gap-1;
+    li {
+      @apply w-[3px] 3xl:w-[5px];
+      height: 15px;
+      border-radius: 25px;
+      animation: equaliser 1.5s linear infinite;
+      &:nth-child(1) {
+        background: #fff;
+        animation-delay: 1s;
+      }
+      &:nth-child(2) {
+        background: #fff;
+        animation-delay: 1.25s;
+      }
+      &:nth-child(3) {
+        background: #fff;
+        animation-delay: 1.5s;
+      }
+      &:nth-child(4) {
+        background: #fff;
+        animation-delay: 1.75s;
+      }
+      &:nth-child(5) {
+        background: #fff;
+        animation-delay: 2s;
+      }
+      &:nth-child(6) {
+        background: #fff;
+        animation-delay: 1.1s;
+      }
+    }
+  }
+  @keyframes equaliser {
+    50% {
+      height: 25px;
+    }
+  }
+}
+
+
+
+
+/* styles.css or similar */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  90% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 1.2s linear forwards;
+}
+
+.fade-out {
+  animation: fadeOutDown 1.2s linear forwards;
+}
+
+
+
+
+
+
+
+
+
