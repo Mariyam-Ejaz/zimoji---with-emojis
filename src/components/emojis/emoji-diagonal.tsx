@@ -509,7 +509,7 @@ const EmojiDiagonal = memo(() => {
     const p = new PoissonDiskSampling({
       shape: [areaWidth, areaHeight],
       minDistance,
-      maxDistance: minDistance + (window.innerWidth < 1000 ? 10 : 20),
+      maxDistance: minDistance + (window.innerWidth < 1000 ? 15 : 20),
       tries: 18,
     });
 
