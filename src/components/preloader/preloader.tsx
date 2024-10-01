@@ -51,7 +51,7 @@ export default function Preloader() {
         <Header />
         {/* <RandomEmojis/> */}
         {/* <EmojiSlightMovement/> */}
-        <EmojiDiagonal/>
+        
         <ContentMapping  />
         <Footer />
       </div>
