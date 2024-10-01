@@ -30,7 +30,7 @@ function Content() {
         setTab((prev) => prev + 1);
         console.log(tab);
       }
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);
@@ -51,17 +51,20 @@ function Content() {
         transition={{ duration: 0.8 }}
         className="flex justify-center items-center relative w-max mx-auto h-max my-auto "
       >
-        <div className="flex items-start">
-          <img
-            src={"/assets/ZIMOJI B.svg"}
-            className="h-[65px] lg:h-[71px] 3xl:h-[100px]"
-            alt="zimo"
-          />
-        </div>
+        {isImageLoaded && ( // Only render the image when it's preloaded
+          <div className="flex items-start">
+            <img
+              src="/assets/ZIMOJI B.svg"
+              className="h-[65px] lg:h-[71px] 3xl:h-[100px]"
+              alt="zimo"
+            />
+          </div>
+        )}
         
       </motion.div>
       <AnimatePresence>
-        <ComingSoon tab={tab} />
+      {isImageLoaded && (<ComingSoon tab={tab} />
+       )}
       </AnimatePresence>
     </motion.div>
   );

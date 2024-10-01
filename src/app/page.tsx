@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <Provider store={store}>
       <GetVisitor/>
-      <EmojiDiagonal/>
+      
       <Preloader/>
     </Provider>
   );

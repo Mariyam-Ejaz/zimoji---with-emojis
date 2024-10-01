@@ -54,6 +54,7 @@ export default function Preloader() {
         
         <ContentMapping  />
         <Footer />
+        <EmojiDiagonal/>
       </div>
       </>
  
