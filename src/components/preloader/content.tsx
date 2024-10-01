@@ -9,6 +9,18 @@ import ComingSoon from "./coming-soon";
 
 function Content() {
   const [tab, setTab] = useState<number>(COMINGSOON_TABS.zimoji);
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+
+  // Preload the ZIMOJI B.svg image
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => setIsImageLoaded(true); // Mark as loaded when done
+    };
+
+    preloadImage("/assets/ZIMOJI B.svg"); // Preload the ZIMOJI B.svg image
+  }, []);
 
   // update tab every defined seconds
   useEffect(() => {
