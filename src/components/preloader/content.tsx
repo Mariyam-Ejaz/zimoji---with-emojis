@@ -30,7 +30,7 @@ function Content() {
         setTab((prev) => prev + 1);
         console.log(tab);
       }
-    }, 5000);
+    }, 3000);
 
     return () => {
       clearTimeout(timer);
