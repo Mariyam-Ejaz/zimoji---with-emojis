@@ -39,7 +39,7 @@ function ComingSoon({ tab }: { tab: number }) {
         }, 1200); // Match the duration of the fade-out
   
         // Pause for 3.8 seconds after fade-in is completed
-      }, 7600); // Change the image every 10 seconds (7.6s + 2.4s animations)
+      }, 1000); // Change the image every 10 seconds (7.6s + 2.4s animations)
   
       return () => clearInterval(cycleImages); // Clean up on unmount
     }
