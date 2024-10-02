@@ -5,6 +5,7 @@ import Header from "@/components/preloader/header";
 import usePreventContextMenu from "@/hooks/usePreventContextMenu";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import EmojiDiagonal from "../emojis/emoji-diagonal";
 
 export default function Preloader() {
   // Prevent right-click context menu
@@ -21,6 +22,7 @@ export default function Preloader() {
     <div className="flex flex-col justify-between min-h-dvh bg-black text-white">
       {/* Header with a callback to mark it as loaded */}
       <Header onLoaded={() => setHeaderLoaded(true)} />
+      <EmojiDiagonal/>
 
       {/* Render ContentMapping only after both Header and Footer are loaded */}
       {isLoaded ? (
