@@ -14,9 +14,9 @@ function ContentMapping() {
     <AnimatePresence mode="wait">
       {tab === HOLDING_TABS.welcome && <Welcome key={1} />}
       {tab === HOLDING_TABS.zimojilogo && <Content key={2} />}
-      
+      <EmojiDiagonal/>
     </AnimatePresence>
-    <EmojiDiagonal/>
+    
     </>
   );
 }
