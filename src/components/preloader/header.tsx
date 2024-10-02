@@ -1,9 +1,17 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { RootState } from "@/store";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-/* eslint-disable @next/next/no-img-element */
-function Header() {
+type HeaderProps = {
+  onLoaded: () => void; // Define the type for onLoaded
+};
+
+const Header: React.FC<HeaderProps> = ({ onLoaded }) => {
+  useEffect(() => {
+    // Simulate header being fully loaded
+    onLoaded();
+  }, [onLoaded]);
   const { data } = useSelector((state: RootState) => state.visitor);
 
   return (
