@@ -73,6 +73,21 @@ html{
 }
 
 
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px); /* Start 100px below */
+    opacity: 0; /* Start hidden */
+  }
+  100% {
+    transform: translateY(0); /* End at original position */
+    opacity: 1; /* End visible */
+  }
+}
+
+.animate {
+  animation: slideUp 0.8s forwards; /* Use the slideUp animation */
+}
+
 
 
 // // Emoji Slight Movement animation
