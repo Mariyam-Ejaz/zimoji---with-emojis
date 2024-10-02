@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 // import Countdown from "./countdown";
 import { COMINGSOON_TABS } from "./lib";
 import ComingSoon from "./coming-soon";
+import EmojiDiagonal from "../emojis/emoji-diagonal";
 
 function Content() {
   const [tab, setTab] = useState<number>(COMINGSOON_TABS.zimoji);
@@ -66,6 +67,7 @@ function Content() {
       { (<ComingSoon tab={tab} />
        )}
       </AnimatePresence>
+      <EmojiDiagonal/>
     </motion.div>
   );
 }
