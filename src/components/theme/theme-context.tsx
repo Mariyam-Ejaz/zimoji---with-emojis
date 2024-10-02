@@ -2,35 +2,55 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-// Define the types for the theme
 type Theme = "light" | "dark";
 
-// Define the interface for the Theme context
 interface ThemeContextProps {
   theme: Theme;
-  setTheme: (theme: Theme) => void; // Function to set the theme
+  toggleTheme: () => void; // Add a toggle function to the context
 }
 
-// Create the ThemeContext
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-// Create the ThemeProvider component
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("dark"); // Default to "dark"
+  // Initialize the theme state to null
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    // Set the theme on the root element (html)
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+    // Check localStorage for the stored theme
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    
+    // If a theme is stored, set it to the opposite; otherwise, default to "dark"
+    console.log(storedTheme);
+    if (storedTheme) {
+      setTheme(storedTheme === "light" ? "dark" : "light");
+    } else {
+      setTheme("dark"); // Default to dark theme if nothing is stored
+      localStorage.setItem("theme", "dark"); // Initialize localStorage with "dark"
+    }
+  }, []); // Run this effect just once on mount
 
+  useEffect(() => {
+    if (theme) {
+      // Set the theme on the root element (html)
+      document.documentElement.setAttribute("data-theme", theme);
+      // Save the current theme to local storage whenever it changes
+      localStorage.setItem("theme", theme);
+    }
+  }, [theme]); // Run this effect whenever the theme state changes
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  // Ensure toggleTheme is available in the context
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme: theme ?? "dark", toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-// Create a custom hook to use the Theme context
+// Custom hook to use the ThemeContext
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
