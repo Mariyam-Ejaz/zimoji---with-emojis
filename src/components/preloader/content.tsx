@@ -67,7 +67,7 @@ function Content() {
       { (<ComingSoon tab={tab} />
        )}
       </AnimatePresence>
-      
+      <EmojiDiagonal/>
     </motion.div>
   );
 }

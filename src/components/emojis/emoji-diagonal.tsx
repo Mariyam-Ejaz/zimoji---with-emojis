@@ -866,7 +866,7 @@ const EmojiDiagonal = memo(() => {
   // Render two moving divs for smooth looping animation
   const renderEmojiContainers = () => (
     <div
-      className="emoji-container pointer-events-none absolute p-0"
+      className="emoji-container pointer-events-none absolute p-0 z-1"
       style={{
         top: 0,
         left: 0,
