@@ -35,9 +35,9 @@ export default function RootLayout({
       <body
         className={`${lato.className} `}
       >
-
+<ThemeProvider>
         {children}
-
+        </ThemeProvider>
       </body>
     </html>
   );
