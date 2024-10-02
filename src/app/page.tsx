@@ -20,10 +20,13 @@ export default function Home() {
   // }, []);
 
   return (
+    <>
+    <EmojiDiagonal/>
     <Provider store={store}>
       <GetVisitor/>
       
       <Preloader/>
     </Provider>
+    </>
   );
 }
