@@ -588,7 +588,7 @@ const RandomEmojis = memo(() => {
           clearTimeout(startDelay);
           clearInterval(animationInterval);
         };
-      }, 8000);
+      }, 10000);
 
       return () => clearTimeout(startDelay);
     }
