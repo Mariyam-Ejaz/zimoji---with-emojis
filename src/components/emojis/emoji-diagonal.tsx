@@ -417,7 +417,7 @@
 
 
 
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo, useRef } from 'react';
 import { extractEmojiUrls } from '@/utils/emoji-extractor';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
@@ -451,7 +451,8 @@ const EmojiDiagonal = memo(() => {
   const [refreshKey, setRefreshKey] = useState(0);
   const [visibleEmojiCount, setVisibleEmojiCount] = useState(0);
   const [hasMoved, setHasMoved] = useState(false); // Track movement state
-  const [allEmojisVisible, setAllEmojisVisible] = useState(false); // Track if all emojis are visible
+  const [allEmojisVisible, setAllEmojisVisible] = useState(false); 
+  const emojiRefs = useRef<(HTMLImageElement | null)[]>([]);
 
 //   // Preload emoji images
 //   useEffect(() => {
@@ -526,6 +527,36 @@ const EmojiDiagonal = memo(() => {
     setAllEmojisVisible(false); // Reset visibility
   }, [emojiSize, minDistance, refreshKey]);
 
+  // Lazy load emojis using IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute('data-index'));
+            setVisibleEmojiCount((prevCount) => Math.max(prevCount, index + 1));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: '200px', // Preload before it becomes visible
+        threshold: 0.1, // Trigger when 10% of the emoji is visible
+      }
+    );
+
+    emojiRefs.current.forEach((emoji, index) => {
+      if (emoji) observer.observe(emoji);
+    });
+
+    return () => {
+      emojiRefs.current.forEach((emoji) => {
+        if (emoji) observer.unobserve(emoji);
+      });
+    };
+  }, [emojis]);
+
+
   // Handle emoji appearance based on tab state
   useEffect(() => {
     if (tab >= HOLDING_TABS.zimojilogo) {
@@ -597,6 +628,7 @@ const EmojiDiagonal = memo(() => {
           }}
         >
           {emojis.slice(0, visibleEmojiCount).map((emoji, index) => (
+            
             <motion.img
               key={index}
               src={emoji.src}
