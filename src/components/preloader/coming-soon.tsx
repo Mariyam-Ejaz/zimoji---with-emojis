@@ -2,11 +2,12 @@ import { COMING_SOON, COMINGSOON_TABS } from "@/components/preloader/lib";
 import clsx from "clsx";
 import { useEffect, useState, useMemo } from "react";
 
-// Preload images
-const preloadImages = (images: { img: any; }[]) => {
-  images.forEach(({ img }) => {
+// Preload images and return the Image objects
+const preloadImages = (images: { img: string }[]) => {
+  return images.map(({ img }) => {
     const image = new Image();
     image.src = `/assets/preloader/coming-soon/${img}`;
+    return image;
   });
 };
 
@@ -15,51 +16,52 @@ function ComingSoon({ tab }: { tab: number }) {
   const imageCount = COMING_SOON.length;
   const [isVisible, setIsVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
 
   // Preload images only once when the component mounts
   useEffect(() => {
-    preloadImages(COMING_SOON);
+    const loadedImages = preloadImages(COMING_SOON);
+    setPreloadedImages(loadedImages);
   }, []);
 
   useEffect(() => {
     if (tab >= COMINGSOON_TABS.comingsoon) {
-      setIsVisible(true); // Set visibility to true
-  
       const cycleImages = setInterval(() => {
         setFadeOut(true); // Trigger fade-out animation
-  
+        setIsVisible(true); // Set visibility to true
+
         // Wait for the fade-out to complete
         setTimeout(() => {
           // Change the image right after fading out
           setIndex((prev) => (prev + 1) % imageCount); // Update image
-          console.log(COMING_SOON[index].img)
+          console.log(preloadedImages[index]?.src);
+
           // Reset fade-out (trigger fade-in)
           setFadeOut(false); // Trigger fade-in
-  
+
         }, 1500); // Match the duration of the fade-out
-  
+
         // Pause for 3.8 seconds after fade-in is completed
       }, 10000); // Change the image every 10 seconds (7.6s + 2.4s animations)
-  
+
       return () => clearInterval(cycleImages); // Clean up on unmount
     }
-  }, [tab, imageCount]);
-  
+  }, [tab, imageCount, preloadedImages, index]);
 
   // Memoize the current image for performance
   const currentImage = useMemo(() => {
-    return COMING_SOON[index].img;
-  }, [index]);
+    return preloadedImages[index]?.src;
+  }, [index, preloadedImages]);
 
   return (
     <div className="h-[90px] flex justify-center items-start text-center">
-      {tab >= COMINGSOON_TABS.comingsoon && isVisible && (
+      {tab >= COMINGSOON_TABS.comingsoon && isVisible && currentImage && (
         <img
           className={clsx(COMING_SOON[index].img_css, {
             'fade-in': !fadeOut,
             'fade-out': fadeOut,
           })}
-          src={`/assets/preloader/coming-soon/${currentImage}`}
+          src={currentImage} // Use the preloaded image source
           alt="coming soon"
           style={{
             display: 'block', // Helps prevent layout shifts
