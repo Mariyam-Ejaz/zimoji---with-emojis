@@ -95,6 +95,12 @@ export const extractEmojiUrls = () => {
   return availableEmojis;
 };
 
+// Function to get a random emoji
+export const getRandomEmojiUrl = () => {
+  const randomIndex = Math.floor(Math.random() * availableEmojis.length);
+  return availableEmojis[randomIndex];
+};
+
 
 // // // utils/emoji-extractor.ts
 
