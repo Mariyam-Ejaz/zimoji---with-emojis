@@ -430,7 +430,7 @@ import { motion } from 'framer-motion';
 // Constants
 const EDGE_MARGIN = 6;
 const MAX_EMOJIS = 500;
-const APPEAR_DELAY = 10;
+const APPEAR_DELAY = 50;
 const ANIMATION_DURATION = 3;
 
 interface EmojiProps {
@@ -677,7 +677,7 @@ const styles = `
       transform: translate(0, 0);
     }
     100% {
-      transform: translate(250vw, 250vh);
+      transform: translate(300vw, 300vh);
     }
   }
   
@@ -693,6 +693,7 @@ const styles = `
     width: 300vw;
     height: 300vh;
     animation: diagonalMarquee 21s linear infinite;
+    animation-timing-function: linear;
   }
 
   .moving-1 {
@@ -700,7 +701,7 @@ const styles = `
   }
 
   .moving-2 {
-    animation-delay: 11s; /* Adjust for continuous effect */
+    animation-delay: 10.5s; /* Adjust for continuous effect */
   }
 `;
 
