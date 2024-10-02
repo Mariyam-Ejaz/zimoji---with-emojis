@@ -21,7 +21,7 @@ export default function Home() {
     <Provider store={store}>
  
       <GetVisitor/>
-      <RandomEmojis/>
+      
       {/* <EmojiDiagonal/> */}
       <Preloader/>
      

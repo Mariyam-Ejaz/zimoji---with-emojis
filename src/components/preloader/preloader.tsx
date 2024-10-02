@@ -4,6 +4,7 @@ import ContentMapping from "@/components/preloader/content-mapping";
 import Footer from "@/components/preloader/footer";
 import Header from "@/components/preloader/header";
 import { useTheme } from "@/components/theme/theme-context"; // Import your custom theme context
+import RandomEmojis from "../emojis/random-emojis";
 
 export default function Preloader() {
   const { theme } = useTheme(); // Get the current theme from the context
@@ -22,6 +23,7 @@ export default function Preloader() {
       {/* <EmojiSlightMovement /> */}
       <ContentMapping />
       <Footer />
+      <RandomEmojis/>
     </div>
   );
 }
