@@ -515,7 +515,7 @@ const RandomEmojis = memo(() => {
     const handleResize = debounce(() => {
       if (window.innerWidth >= 1536) {
         setMinDistance(280);
-        setEmojiSize(95);
+        setEmojiSize(70);
       } else if (window.innerWidth >= 1000) {
         setMinDistance(210);
         setEmojiSize(60);
