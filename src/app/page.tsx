@@ -6,6 +6,7 @@ import Preloader from "@/components/preloader/preloader";
 import GetVisitor from "@/components/globals/GetVisitor";
 import EmojiDiagonal from "@/components/emojis/emoji-diagonal";
 import { useEffect } from "react";
+import RandomEmojis from "@/components/emojis/random-emojis";
 
 export default function Home() {
   // Use the custom hook to prevent the context menu
@@ -24,7 +25,8 @@ export default function Home() {
     
     <Provider store={store}>
       <GetVisitor/>
-      <EmojiDiagonal/>
+      <RandomEmojis/>
+      {/* <EmojiDiagonal/> */}
       <Preloader/>
     </Provider>
     </>
