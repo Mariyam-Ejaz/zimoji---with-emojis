@@ -487,28 +487,28 @@ const RandomEmojis = memo(() => {
   const animationFrameRef = useRef<number | null>(null); 
 
   // Preload emoji images
-  useEffect(() => {
-    const preloadEmojis = async (emojiUrls: string[]) => {
-      const promises = emojiUrls.map((src) => {
-        return new Promise<void>((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = () => resolve();
-          img.onerror = () => reject();
-        });
-      });
+  // useEffect(() => {
+  //   const preloadEmojis = async (emojiUrls: string[]) => {
+  //     const promises = emojiUrls.map((src) => {
+  //       return new Promise<void>((resolve, reject) => {
+  //         const img = new Image();
+  //         img.src = src;
+  //         img.onload = () => resolve();
+  //         img.onerror = () => reject();
+  //       });
+  //     });
 
-      try {
-        await Promise.all(promises);
-        setPreloaded(true); // All images are preloaded
-      } catch (error) {
-        console.error("Failed to preload some emojis", error);
-      }
-    };
+  //     try {
+  //       await Promise.all(promises);
+  //       setPreloaded(true); // All images are preloaded
+  //     } catch (error) {
+  //       console.error("Failed to preload some emojis", error);
+  //     }
+  //   };
 
-    const emojiUrls = extractEmojiUrls();
-    preloadEmojis(emojiUrls).then(() => setPreloadedEmojis(emojiUrls)); // Store preloaded emojis
-  }, []);
+  //   const emojiUrls = extractEmojiUrls();
+  //   preloadEmojis(emojiUrls).then(() => setPreloadedEmojis(emojiUrls)); // Store preloaded emojis
+  // }, []);
 
   // Update the sampling area on resize
   useEffect(() => {
@@ -533,7 +533,7 @@ const RandomEmojis = memo(() => {
 
   // Generate emoji positions and set up sampling area
   useEffect(() => {
-    if (!preloaded) return; // Don't proceed until preloading is done
+    // if (!preloaded) return; // Don't proceed until preloading is done
 
     const [areaWidth, areaHeight] = getSamplingArea(window.innerWidth, window.innerHeight, EDGE_MARGIN, emojiSize);
     setSamplingArea([areaWidth, areaHeight]);
