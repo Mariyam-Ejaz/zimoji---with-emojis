@@ -8,11 +8,14 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ onLoaded }) => {
-  useEffect(() => {
-    // Simulate header being fully loaded
-    onLoaded();
-  }, [onLoaded]);
   const { data } = useSelector((state: RootState) => state.visitor);
+  useEffect(() => {
+    if (data){
+      onLoaded();
+    }
+    
+  }, [onLoaded]);
+  
 
   return (
     <header className="flex justify-end gap-x-8 3xl:gap-x-14 container__padding container__padding__y z-50 ">
