@@ -3,12 +3,12 @@ import clsx from "clsx";
 import { useEffect, useState, useMemo } from "react";
 
 // Preload images
-const preloadImages = (images: { img: any; }[]) => {
-  images.forEach(({ img }) => {
-    const image = new Image();
-    image.src = `/assets/preloader/coming-soon/${img}`;
-  });
-};
+// const preloadImages = (images: { img: any; }[]) => {
+//   images.forEach(({ img }) => {
+//     const image = new Image();
+//     image.src = `/assets/preloader/coming-soon/${img}`;
+//   });
+// };
 
 function ComingSoon({ tab }: { tab: number }) {
   const [index, setIndex] = useState(0);
@@ -17,9 +17,9 @@ function ComingSoon({ tab }: { tab: number }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   // Preload images only once when the component mounts
-  useEffect(() => {
-    preloadImages(COMING_SOON);
-  }, []);
+  // useEffect(() => {
+  //   preloadImages(COMING_SOON);
+  // }, []);
 
   useEffect(() => {
     if (tab >= COMINGSOON_TABS.comingsoon) {
@@ -52,7 +52,7 @@ function ComingSoon({ tab }: { tab: number }) {
 
   return (
     <div className="h-[90px] flex justify-center items-start text-center">
-      {tab >= COMINGSOON_TABS.comingsoon && isVisible && (
+      {tab >= COMINGSOON_TABS.comingsoon  && (
         <img
           className={clsx(COMING_SOON[index].img_css, {
             'fade-in': !fadeOut,
