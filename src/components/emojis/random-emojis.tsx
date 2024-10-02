@@ -514,7 +514,7 @@ const RandomEmojis = memo(() => {
   useEffect(() => {
     const handleResize = debounce(() => {
       if (window.innerWidth >= 1536) {
-        setMinDistance(330);
+        setMinDistance(280);
         setEmojiSize(95);
       } else if (window.innerWidth >= 1000) {
         setMinDistance(210);
@@ -586,7 +586,7 @@ const RandomEmojis = memo(() => {
           clearTimeout(startDelay);
           clearInterval(animationInterval);
         };
-      }, 5000);
+      }, 1000);
 
       return () => clearTimeout(startDelay);
     }
