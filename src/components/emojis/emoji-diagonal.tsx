@@ -677,7 +677,7 @@ const styles = `
       transform: translate(0, 0);
     }
     100% {
-      transform: translate(300vw, 300vh);
+      transform: translate(250vw, 250vh);
     }
   }
   
