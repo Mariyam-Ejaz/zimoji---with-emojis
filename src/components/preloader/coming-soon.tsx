@@ -14,7 +14,7 @@ const preloadImages = (images: { img: string }[]) => {
 function ComingSoon({ tab }: { tab: number }) {
   const [index, setIndex] = useState(0);
   const imageCount = COMING_SOON.length;
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
 
