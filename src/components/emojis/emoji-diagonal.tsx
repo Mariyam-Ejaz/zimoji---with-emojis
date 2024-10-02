@@ -441,7 +441,7 @@ interface EmojiProps {
 
 const EmojiDiagonal = memo(() => {
   const [emojis, setEmojis] = useState<EmojiProps[]>([]);
-  const [preloaded, setPreloaded] = useState(false);
+//   const [preloaded, setPreloaded] = useState(false);
   const [selectedEmojiIndex, setSelectedEmojiIndex] = useState<number | null>(null);
   const [activeAnimation, setActiveAnimation] = useState<number | null>(null);
   const { tab } = useSelector((state: RootState) => state.holding);
@@ -453,29 +453,29 @@ const EmojiDiagonal = memo(() => {
   const [hasMoved, setHasMoved] = useState(false); // Track movement state
   const [allEmojisVisible, setAllEmojisVisible] = useState(false); // Track if all emojis are visible
 
-  // Preload emoji images
-  useEffect(() => {
-    const preloadEmojis = async (emojiUrls: string[]) => {
-      const promises = emojiUrls.map((src) => {
-        return new Promise<void>((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = () => resolve();
-          img.onerror = () => reject();
-        });
-      });
+//   // Preload emoji images
+//   useEffect(() => {
+//     const preloadEmojis = async (emojiUrls: string[]) => {
+//       const promises = emojiUrls.map((src) => {
+//         return new Promise<void>((resolve, reject) => {
+//           const img = new Image();
+//           img.src = src;
+//           img.onload = () => resolve();
+//           img.onerror = () => reject();
+//         });
+//       });
 
-      try {
-        await Promise.all(promises);
-        setPreloaded(true);
-      } catch (error) {
-        console.error("Failed to preload some emojis", error);
-      }
-    };
+//       try {
+//         await Promise.all(promises);
+//         setPreloaded(true);
+//       } catch (error) {
+//         console.error("Failed to preload some emojis", error);
+//       }
+//     };
 
-    const emojiUrls = extractEmojiUrls();
-    preloadEmojis(emojiUrls);
-  }, []); // Runs only once when the component mounts
+//     const emojiUrls = extractEmojiUrls();
+//     preloadEmojis(emojiUrls);
+//   }, []); // Runs only once when the component mounts
 
   // Update the sampling area on resize
   useEffect(() => {
@@ -500,7 +500,7 @@ const EmojiDiagonal = memo(() => {
 
   // Generate emoji positions and set up sampling area
   useEffect(() => {
-    if (!preloaded) return;
+    // if (!preloaded) return;
 
     const emojiUrls = extractEmojiUrls();
     const [areaWidth, areaHeight] = getSamplingArea(window.innerWidth * 3, window.innerHeight * 3, EDGE_MARGIN, emojiSize);
@@ -524,7 +524,7 @@ const EmojiDiagonal = memo(() => {
     setEmojis(newEmojis);
     setVisibleEmojiCount(0);
     setAllEmojisVisible(false); // Reset visibility
-  }, [emojiSize, minDistance, refreshKey, preloaded]);
+  }, [emojiSize, minDistance, refreshKey]);
 
   // Handle emoji appearance based on tab state
   useEffect(() => {

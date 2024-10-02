@@ -9,18 +9,18 @@ import ComingSoon from "./coming-soon";
 
 function Content() {
   const [tab, setTab] = useState<number>(COMINGSOON_TABS.zimoji);
-  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+  // const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
 
   // Preload the ZIMOJI B.svg image
-  useEffect(() => {
-    const preloadImage = (src: string) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => setIsImageLoaded(true); // Mark as loaded when done
-    };
+  // useEffect(() => {
+  //   const preloadImage = (src: string) => {
+  //     const img = new Image();
+  //     img.src = src;
+  //     img.onload = () => setIsImageLoaded(true); // Mark as loaded when done
+  //   };
 
-    preloadImage("/assets/ZIMOJI B.svg"); // Preload the ZIMOJI B.svg image
-  }, []);
+  //   preloadImage("/assets/ZIMOJI B.svg"); // Preload the ZIMOJI B.svg image
+  // }, []);
 
   // update tab every defined seconds
   useEffect(() => {
@@ -51,7 +51,7 @@ function Content() {
         transition={{ duration: 0.8 }}
         className="flex justify-center items-center relative w-max mx-auto h-max my-auto "
       >
-        {isImageLoaded && ( // Only render the image when it's preloaded
+        {( // Only render the image when it's preloaded
           <div className="flex items-start">
             <img
               src="/assets/ZIMOJI B.svg"
@@ -63,7 +63,7 @@ function Content() {
         
       </motion.div>
       <AnimatePresence>
-      {isImageLoaded && (<ComingSoon tab={tab} />
+      { (<ComingSoon tab={tab} />
        )}
       </AnimatePresence>
     </motion.div>
