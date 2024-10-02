@@ -16,10 +16,10 @@ function ComingSoon({ tab }: { tab: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // // Preload images only once when the component mounts
-  // useEffect(() => {
-  //   preloadImages(COMING_SOON);
-  // }, []);
+  // Preload images only once when the component mounts
+  useEffect(() => {
+    preloadImages(COMING_SOON);
+  }, []);
 
   useEffect(() => {
     if (tab >= COMINGSOON_TABS.comingsoon) {
