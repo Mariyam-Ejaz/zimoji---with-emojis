@@ -1,21 +1,10 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { RootState } from "@/store";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-type HeaderProps = {
-  onLoaded: () => void; // Define the type for onLoaded
-};
-
-const Header: React.FC<HeaderProps> = ({ onLoaded }) => {
+/* eslint-disable @next/next/no-img-element */
+function Header() {
   const { data } = useSelector((state: RootState) => state.visitor);
-  useEffect(() => {
-    if (data){
-      onLoaded();
-    }
-    
-  }, [onLoaded]);
-  
 
   return (
     <header className="flex justify-end gap-x-8 3xl:gap-x-14 container__padding container__padding__y z-50 ">

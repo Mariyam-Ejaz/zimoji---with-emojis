@@ -1,14 +1,5 @@
-import { useEffect } from "react";
-
-type FooterProps = {
-  onLoaded: () => void; // Define the type for onLoaded
-};
-
-const Footer: React.FC<FooterProps> = ({ onLoaded }) => {
-  useEffect(() => {
-    // Simulate footer being fully loaded
-    onLoaded();
-  }, [onLoaded]);
+/* eslint-disable @next/next/no-img-element */
+function Footer() {
   return (
     <footer className="flex gap-4 justify-between tracking-[1.5px] container__padding uppercase container__padding__y z-10">
       <div className="flex items-end gap-1">
