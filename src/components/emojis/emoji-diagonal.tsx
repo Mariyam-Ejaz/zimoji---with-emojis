@@ -430,7 +430,7 @@ import { motion } from 'framer-motion';
 // Constants
 const EDGE_MARGIN = 6;
 const MAX_EMOJIS = 500;
-const APPEAR_DELAY = 50;
+const APPEAR_DELAY = 10;
 const ANIMATION_DURATION = 3;
 
 interface EmojiProps {
@@ -677,7 +677,7 @@ const styles = `
       transform: translate(0, 0);
     }
     100% {
-      transform: translate(200vw, 200vh);
+      transform: translate(250vw, 250vh);
     }
   }
   
@@ -700,7 +700,7 @@ const styles = `
   }
 
   .moving-2 {
-    animation-delay: 10s; /* Adjust for continuous effect */
+    animation-delay: 11s; /* Adjust for continuous effect */
   }
 `;
 
