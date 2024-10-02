@@ -140,8 +140,6 @@ function ComingSoon({ tab }: { tab: number }) {
 
   useEffect(() => {
     if (tab >= COMINGSOON_TABS.comingsoon) {
-      // Preload the next image when the component mounts
-      preloadNextImage(COMING_SOON[(index + 1) % imageCount].img);
 
       const cycleImages = setInterval(() => {
         // Change the image and preload the next one
