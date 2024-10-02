@@ -22,7 +22,7 @@ export default function Preloader() {
     <div className="flex flex-col justify-between min-h-dvh bg-black text-white">
       {/* Header with a callback to mark it as loaded */}
       <Header onLoaded={() => setHeaderLoaded(true)} />
-      <EmojiDiagonal/>
+      
 
       {/* Render ContentMapping only after both Header and Footer are loaded */}
       {isLoaded ? (
