@@ -473,6 +473,7 @@ interface EmojiProps {
 
 const RandomEmojis = memo(() => {
   const [emojis, setEmojis] = useState<EmojiProps[]>([]);
+  const [preloadedEmojis, setPreloadedEmojis] = useState<string[]>([]); // Track preloaded emojis
   const [preloaded, setPreloaded] = useState(false); // Track preloading state
   const [selectedEmojiIndex, setSelectedEmojiIndex] = useState<number | null>(null);
   const [activeAnimation, setActiveAnimation] = useState<number | null>(null);
@@ -506,7 +507,7 @@ const RandomEmojis = memo(() => {
     };
 
     const emojiUrls = extractEmojiUrls();
-    preloadEmojis(emojiUrls);
+    preloadEmojis(emojiUrls).then(() => setPreloadedEmojis(emojiUrls)); // Store preloaded emojis
   }, []);
 
   // Update the sampling area on resize
@@ -534,7 +535,6 @@ const RandomEmojis = memo(() => {
   useEffect(() => {
     if (!preloaded) return; // Don't proceed until preloading is done
 
-    const emojiUrls = extractEmojiUrls();
     const [areaWidth, areaHeight] = getSamplingArea(window.innerWidth, window.innerHeight, EDGE_MARGIN, emojiSize);
     setSamplingArea([areaWidth, areaHeight]);
 
@@ -548,14 +548,14 @@ const RandomEmojis = memo(() => {
     const points = p.fill().slice(0, MAX_EMOJIS);
 
     const newEmojis: EmojiProps[] = points.map((point, index) => ({
-      src: emojiUrls[index % emojiUrls.length],
+      src: preloadedEmojis[index % preloadedEmojis.length], // Use preloaded emojis
       left: point[0] + EDGE_MARGIN / 3,
       top: point[1] + EDGE_MARGIN / 3,
     }));
 
     setEmojis(newEmojis);
     setVisibleEmojiCount(0);
-  }, [emojiSize, minDistance, refreshKey, preloaded]);
+  }, [emojiSize, minDistance, refreshKey, preloaded, preloadedEmojis]);
 
   // Handle emoji appearance based on tab state
   useEffect(() => {
@@ -667,6 +667,7 @@ const RandomEmojis = memo(() => {
 });
 
 export default memo(RandomEmojis);
+
 
 
 
