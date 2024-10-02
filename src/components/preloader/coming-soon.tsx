@@ -32,11 +32,11 @@ function ComingSoon({ tab }: { tab: number }) {
         setTimeout(() => {
           // Change the image right after fading out
           setIndex((prev) => (prev + 1) % imageCount); // Update image
-  
+          console.log(COMING_SOON[index].img)
           // Reset fade-out (trigger fade-in)
           setFadeOut(false); // Trigger fade-in
   
-        }, 1200); // Match the duration of the fade-out
+        }, 1500); // Match the duration of the fade-out
   
         // Pause for 3.8 seconds after fade-in is completed
       }, 10000); // Change the image every 10 seconds (7.6s + 2.4s animations)
