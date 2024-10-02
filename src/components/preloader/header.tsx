@@ -1,6 +1,7 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
+import ScanIcon from "../assets/scan-icon";
 
 /* eslint-disable @next/next/no-img-element */
 function Header() {
@@ -12,10 +13,7 @@ function Header() {
 
       {data?.countryCode ? (
         <>
-        <img
-        src="/assets/Scan Icon ZIMOJI W.svg"
-        className="h-[27px] lg:h-[35px] 3xl:h-[50px] fill-black color-black"
-        alt=""
+        <ScanIcon
       />
       <img
           className="h-[27px] lg:h-[35px] 3xl:h-[50px] w-auto"

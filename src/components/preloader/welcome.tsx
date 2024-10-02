@@ -4,8 +4,16 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { HOLDING_TABS } from "./lib";
+import { useTheme } from "@/components/theme/theme-context"; // Import your theme context
+
+  
 
 function Welcome() {
+  const { theme } = useTheme(); // Get the current theme
+
+  // Define the fill color based on the theme
+  const fillColor = theme === 'dark' ? '#fff' : '#000';
+
   const dispatch = useDispatch();
   // change tab after defined seconds
   useEffect(() => {
@@ -33,12 +41,13 @@ function Welcome() {
         initial={{ scale: 1 }}
         animate={{ scale: 1000 }}
         transition={{ duration: 12, ease: "easeInOut", delay: 2 }}
+        fill={fillColor}
       >
         <defs>
           <style>
             {`
             .cls-1 {
-        fill: #fff;
+        fill={fillColor} ;
         stroke-width: 0px;
       }
           `}

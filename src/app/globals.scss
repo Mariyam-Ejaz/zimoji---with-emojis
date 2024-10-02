@@ -7,6 +7,16 @@
 @import "@/styles/utils.scss";
 @import "@/styles/holding.scss";
 
+:root {
+  --bg-color: rgb(253, 253, 253); // Light background
+  --text-color: black;            // Light text
+}
+
+[data-theme="dark"] {
+  --bg-color: black;              // Dark background
+  --text-color: white;            // Dark text
+}
+
 html {
   scroll-behavior: smooth;
   user-select: none;
@@ -19,16 +29,23 @@ img {
 body {
   @apply transition-colors duration-300; // Smooth transition
   overflow: hidden;
-  background-color: black;
+  background-color: var(--bg-color);
 }
 
 html{
   width: 100dvw;
   height: 100dvh;
   overflow: hidden;
+  background-color: var(--bg-color);
 }
 
+.bg-black{
+  background-color: black;
+}
 
+.bg-white{
+  background-color: rgb(253, 253, 253);
+}
 
 
 

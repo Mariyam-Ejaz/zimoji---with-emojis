@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { COMINGSOON_TABS } from "./lib";
 import ComingSoon from "./coming-soon";
 import EmojiDiagonal from "../emojis/emoji-diagonal";
+import ZimojiB from "../assets/zimoji-b";
 
 function Content() {
   const [tab, setTab] = useState<number>(COMINGSOON_TABS.zimoji);
@@ -54,11 +55,7 @@ function Content() {
       >
         {( // Only render the image when it's preloaded
           <div className="flex items-start">
-            <img
-              src="/assets/ZIMOJI B.svg"
-              className="h-[65px] lg:h-[71px] 3xl:h-[100px]"
-              alt="zimo"
-            />
+            <ZimojiB/>
           </div>
         )}
         

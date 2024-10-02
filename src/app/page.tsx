@@ -7,6 +7,7 @@ import GetVisitor from "@/components/globals/GetVisitor";
 import EmojiDiagonal from "@/components/emojis/emoji-diagonal";
 import { useEffect } from "react";
 import RandomEmojis from "@/components/emojis/random-emojis";
+import { ThemeProvider } from "@/components/theme/theme-context";
 
 export default function Home() {
   // Use the custom hook to prevent the context menu
@@ -22,12 +23,13 @@ export default function Home() {
 
   return (
     <>
-    
     <Provider store={store}>
+    <ThemeProvider>
       <GetVisitor/>
       <RandomEmojis/>
       {/* <EmojiDiagonal/> */}
       <Preloader/>
+      </ThemeProvider>
     </Provider>
     </>
   );
