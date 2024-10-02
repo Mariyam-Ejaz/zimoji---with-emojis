@@ -38,7 +38,7 @@ function ComingSoon({ tab }: { tab: number }) {
   
         }, 2500); // Match the duration of the fade-out
   
-      }, 10000); // Change image every 10 seconds
+      }, 5000); // Change image every 10 seconds
   
       return () => clearInterval(cycleImages); // Clear interval on unmount
     }
