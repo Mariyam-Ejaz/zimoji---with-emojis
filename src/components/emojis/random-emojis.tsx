@@ -534,6 +534,8 @@ const RandomEmojis = memo(() => {
   // Generate emoji positions and set up sampling area
   useEffect(() => {
     // if (!preloaded) return; // Don't proceed until preloading is done
+    const emojiUrls = extractEmojiUrls();
+    setPreloadedEmojis(emojiUrls)
 
     const [areaWidth, areaHeight] = getSamplingArea(window.innerWidth, window.innerHeight, EDGE_MARGIN, emojiSize);
     setSamplingArea([areaWidth, areaHeight]);
@@ -586,7 +588,7 @@ const RandomEmojis = memo(() => {
           clearTimeout(startDelay);
           clearInterval(animationInterval);
         };
-      }, 1000);
+      }, 5000);
 
       return () => clearTimeout(startDelay);
     }
