@@ -26,21 +26,22 @@ function ComingSoon({ tab }: { tab: number }) {
       setIsVisible(true); // Set visibility to true
   
       const cycleImages = setInterval(() => {
-        setFadeOut(true); // Trigger fade out
+        setFadeOut(true); // Trigger fade-out animation
   
-        // Wait for the fade-out duration
+        // Wait for the fade-out to complete
         setTimeout(() => {
           // Change the image right after fading out
-          setIndex((prev) => (prev + 1) % imageCount); // Change the image
+          setIndex((prev) => (prev + 1) % imageCount); // Update image
   
-          // Reset fade out after changing the image
-          setFadeOut(false); // Trigger fade in
+          // Reset fade-out (trigger fade-in)
+          setFadeOut(false); // Trigger fade-in
   
-        }, 2500); // Match the duration of the fade-out
+        }, 1200); // Match the duration of the fade-out
   
-      }, 5000); // Change image every 10 seconds
+        // Pause for 3.8 seconds after fade-in is completed
+      }, 7600); // Change the image every 10 seconds (7.6s + 2.4s animations)
   
-      return () => clearInterval(cycleImages); // Clear interval on unmount
+      return () => clearInterval(cycleImages); // Clean up on unmount
     }
   }, [tab, imageCount]);
   
