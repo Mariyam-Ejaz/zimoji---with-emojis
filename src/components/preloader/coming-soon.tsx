@@ -1,6 +1,7 @@
 import { COMING_SOON, COMINGSOON_TABS } from "@/components/preloader/lib";
 import clsx from "clsx";
 import { useEffect, useState, useMemo } from "react";
+import { useTheme } from "../theme/theme-context";
 
 // Preload images and return the Image objects
 const preloadImages = (images: { img: string }[]) => {
@@ -17,6 +18,7 @@ function ComingSoon({ tab }: { tab: number }) {
   const [isVisible, setIsVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
+  const { theme } = useTheme();
 
   // Preload images only once when the component mounts
   useEffect(() => {
@@ -54,7 +56,7 @@ function ComingSoon({ tab }: { tab: number }) {
   }, [index, preloadedImages]);
 
   return (
-    <div className="h-[90px] flex justify-center items-start text-center">
+    <div className="h-[90px] flex justify-center items-start text-center text-[var(--text-color)]">
       {tab >= COMINGSOON_TABS.comingsoon && isVisible && currentImage && (
         <img
           className={clsx(COMING_SOON[index].img_css, {
@@ -64,6 +66,7 @@ function ComingSoon({ tab }: { tab: number }) {
           src={currentImage} // Use the preloaded image source
           alt="coming soon"
           style={{
+            filter: theme === "light" ? "invert(100%)" : "none",
             display: 'block', // Helps prevent layout shifts
             willChange: 'transform, opacity',
           }}
