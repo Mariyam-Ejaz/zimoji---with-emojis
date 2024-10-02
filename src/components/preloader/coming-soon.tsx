@@ -124,11 +124,9 @@
 
 
 import { COMING_SOON, COMINGSOON_TABS } from "@/components/preloader/lib";
-import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
-// Function to preload the next image
 const preloadNextImage = (nextImage: string) => {
   const image = new Image();
   image.src = `/assets/preloader/coming-soon/${nextImage}`;
@@ -136,18 +134,29 @@ const preloadNextImage = (nextImage: string) => {
 
 function ComingSoon({ tab }: { tab: number }) {
   const [index, setIndex] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
   const imageCount = COMING_SOON.length;
 
   useEffect(() => {
     if (tab >= COMINGSOON_TABS.comingsoon) {
+      // Preload the next image initially
+      preloadNextImage(COMING_SOON[(index + 1) % imageCount].img);
 
       const cycleImages = setInterval(() => {
-        // Change the image and preload the next one
-        setIndex((prevIndex) => {
-          const nextIndex = (prevIndex + 1) % imageCount;
-          preloadNextImage(COMING_SOON[(nextIndex + 1) % imageCount].img);
-          return nextIndex;
-        });
+        // Trigger fade-out animation
+        setFadeOut(true);
+
+        // After fade-out finishes, change image
+        setTimeout(() => {
+          setIndex((prevIndex) => {
+            const nextIndex = (prevIndex + 1) % imageCount;
+            preloadNextImage(COMING_SOON[(nextIndex + 1) % imageCount].img); // Preload the next image
+            return nextIndex;
+          });
+          // Trigger fade-in animation
+          setFadeOut(false);
+        }, 1200); // Time for fade-out animation to complete (matches CSS)
+
       }, 10000); // Change image every 10 seconds
 
       return () => clearInterval(cycleImages); // Clear interval on unmount
@@ -156,24 +165,20 @@ function ComingSoon({ tab }: { tab: number }) {
 
   return (
     <div className="h-[90px] flex justify-center items-start text-center">
-      <AnimatePresence mode="wait">
-        {tab >= COMINGSOON_TABS.comingsoon && (
-          <motion.img
-            key={index}
-            src={`/assets/preloader/coming-soon/${COMING_SOON[index].img}`}
-            alt="coming soon"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className={clsx(COMING_SOON[index].img_css)}
-            style={{
-              display: 'block',
-              willChange: 'transform, opacity',
-            }}
-          />
-        )}
-      </AnimatePresence>
+      {tab >= COMINGSOON_TABS.comingsoon && (
+        <img
+          className={clsx(COMING_SOON[index].img_css, {
+            'fade-in': !fadeOut,
+            'fade-out': fadeOut,
+          })}
+          src={`/assets/preloader/coming-soon/${COMING_SOON[index].img}`}
+          alt="coming soon"
+          style={{
+            display: 'block',
+            willChange: 'transform, opacity',
+          }}
+        />
+      )}
     </div>
   );
 }
