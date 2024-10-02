@@ -11,13 +11,13 @@ export default function Home() {
   // Use the custom hook to prevent the context menu
   usePreventContextMenu();
 
-  useEffect(() => {
-    // Check if the page has already been loaded (using sessionStorage to avoid multiple reloads)
-    if (!sessionStorage.getItem("pageLoaded")) {
-      sessionStorage.setItem("pageLoaded", "true");
-      window.location.reload();
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Check if the page has already been loaded (using sessionStorage to avoid multiple reloads)
+  //   if (!sessionStorage.getItem("pageLoaded")) {
+  //     sessionStorage.setItem("pageLoaded", "true");
+  //     window.location.reload();
+  //   }
+  // }, []);
 
   return (
     <Provider store={store}>
