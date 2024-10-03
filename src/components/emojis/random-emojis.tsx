@@ -568,7 +568,9 @@ const RandomEmojis = memo(() => {
             setVisibleEmojiCount((prevCount) => prevCount + 1);
             setTimeout(() => addEmojiWithDelay(index + 1), 500);
           } else {
-            setAnimateContainer(true); // Start animation after all emojis appear
+            setTimeout(() => {
+              setAnimateContainer(true); // Start animation after a delay
+            }, 2000);
           }
         };
 
