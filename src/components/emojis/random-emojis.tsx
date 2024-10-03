@@ -566,7 +566,7 @@ const RandomEmojis = memo(() => {
         const addEmojiWithDelay = (index: number) => {
           if (index < emojis.length) {
             setVisibleEmojiCount((prevCount) => prevCount + 1);
-            setTimeout(() => addEmojiWithDelay(index + 1), 50);
+            setTimeout(() => addEmojiWithDelay(index + 1), 200);
           } else {
             setAnimateContainer(true); // Start animation after all emojis appear
           }
@@ -673,6 +673,193 @@ export default memo(RandomEmojis);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState, useRef, memo } from 'react';
+// import { encode } from 'modern-gif'; // GIF encoding library
+// import { extractEmojiUrls } from '@/utils/emoji-extractor'; // Utility to get emoji URLs
+// import PoissonDiskSampling from 'poisson-disk-sampling'; // For emoji placement
+
+// // Constants
+// const EDGE_MARGIN = 6;
+// const MAX_EMOJIS = 500;
+
+// interface EmojiProps {
+//   src: string;
+//   top: number;
+//   left: number;
+// }
+
+// const RandomEmojis = memo(() => {
+//   const [emojis, setEmojis] = useState<EmojiProps[]>([]);
+//   const [emojiSize, setEmojiSize] = useState(40);
+//   const [minDistance, setMinDistance] = useState(60);
+//   const [samplingArea, setSamplingArea] = useState<[number, number]>([0, 0]);
+//   const [visibleEmojiCount, setVisibleEmojiCount] = useState(0);
+//   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+//   // Update the sampling area on resize
+//   useEffect(() => {
+//     const handleResize = () => {
+//       if (window.innerWidth >= 1736) {
+//         setMinDistance(280);
+//         setEmojiSize(70);
+//       } else if (window.innerWidth >= 1000) {
+//         setMinDistance(210);
+//         setEmojiSize(60);
+//       } else {
+//         setMinDistance(90);
+//         setEmojiSize(40);
+//       }
+//     };
+
+//     handleResize();
+//     window.addEventListener('resize', handleResize);
+//     return () => window.removeEventListener('resize', handleResize);
+//   }, []);
+
+//   // Generate emoji positions and set up sampling area
+//   useEffect(() => {
+//     const emojiUrls = extractEmojiUrls(); // Assuming emoji extraction utility
+//     const [areaWidth, areaHeight] = [window.innerWidth, window.innerHeight];
+//     setSamplingArea([areaWidth, areaHeight]);
+
+//     const p = new PoissonDiskSampling({
+//       shape: [areaWidth, areaHeight],
+//       minDistance,
+//       maxDistance: minDistance + (window.innerWidth < 1000 ? 10 : 20),
+//       tries: 18,
+//     });
+
+//     const points = p.fill().slice(0, MAX_EMOJIS);
+
+//     const newEmojis: EmojiProps[] = points.map((point, index) => ({
+//       src: emojiUrls[index % emojiUrls.length], // Use the extracted emojis
+//       left: point[0] + EDGE_MARGIN / 3,
+//       top: point[1] + EDGE_MARGIN / 3,
+//     }));
+
+//     setEmojis(newEmojis);
+//     setVisibleEmojiCount(newEmojis.length);
+//   }, [emojiSize, minDistance]);
+
+//   // Function to capture canvas frames and generate a GIF
+//   const handleGenerateGif = async () => {
+//     const canvas = canvasRef.current;
+//     if (!canvas) return;
+
+//     const ctx = canvas.getContext('2d');
+//     if (!ctx) return;
+
+//     const frames: { data: string; delay: number }[] = [];
+
+//     for (const emoji of emojis.slice(0, visibleEmojiCount)) {
+//       await new Promise((resolve) => {
+//         const img = new Image();
+//         img.src = emoji.src;
+
+//         img.onload = () => {
+//           ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+//           ctx.drawImage(img, emoji.left, emoji.top, emojiSize, emojiSize); // Draw emoji
+
+//           // Capture frame as data URL
+//           const frameData = canvas.toDataURL();
+//           frames.push({ data: frameData, delay: 100 }); // Add frame with delay
+//           resolve(null);
+//         };
+//       });
+//     }
+
+//     if (frames.length > 0) {
+//       // Encode frames into a GIF
+//       const output = await encode({
+//         workerUrl: '/modernGifWorker.js', // Use your worker URL if needed
+//         width: canvas.width,
+//         height: canvas.height,
+//         frames,
+//       });
+
+//       const blob = new Blob([output], { type: 'image/gif' });
+//       window.open(URL.createObjectURL(blob)); // Display the generated GIF
+//     }
+//   };
+
+//   return (
+//     <div className='pointer-events-none absolute top-0 left-0 w-full h-full overflow-hidden'>
+     
+
+//       {/* Emoji rendering for display */}
+//       <div className="emoji-container">
+//         {emojis.slice(0, visibleEmojiCount).map((emoji, index) => (
+//           <img
+//             key={index}
+//             src={emoji.src}
+//             alt={`emoji-${index}`}
+//             style={{
+//               position: 'absolute',
+//               top: `${emoji.top}px`,
+//               left: `${emoji.left}px`,
+//               width: `${emojiSize}px`,
+//               height: 'auto',
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// });
+
+// export default memo(RandomEmojis);
 
 
 
