@@ -8,7 +8,7 @@ function Header() {
   const { data } = useSelector((state: RootState) => state.visitor);
 
   return (
-    <header className="flex justify-end gap-x-8 3xl:gap-x-14 container__padding container__padding__y z-50 ">
+    <header className="flex justify-end gap-x-8 3xl:gap-x-14 container__padding container__padding__y z-10">
 
 
       {data?.countryCode ? (

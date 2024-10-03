@@ -15,23 +15,6 @@ export default function Home() {
   // Use the custom hook to prevent the context menu
   usePreventContextMenu();
 
-  async function generateGif() {
-    const workerUrl = '/modernGifWorker.js'; // Point to the worker in the public folder
-  
-    const output = await encode({
-      workerUrl, // Use the custom worker URL
-      width: 200,
-      height: 200,
-      frames: [
-        { data: '/example1.png', delay: 100 }, // Your images
-        { data: '/example2.png', delay: 100 }
-      ]
-    });
-  
-    const blob = new Blob([output], { type: 'image/gif' });
-    window.open(URL.createObjectURL(blob));
-  }
-
 
   return (
     <>

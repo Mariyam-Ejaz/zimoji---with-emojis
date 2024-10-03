@@ -44,14 +44,14 @@ function Content() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="flex flex-col w-max gap-12 3xl:gap-16 mx-auto z-50"
+      className="flex flex-col w-max gap-12 3xl:gap-16 mx-auto z-10"
       contextMenu="return false;"
     >
       <motion.div
         initial={{ y: 100 }}
         animate={{ y: tab >= COMINGSOON_TABS.up ? 0 : 100 }}
         transition={{ duration: 0.8 }}
-        className="flex justify-center items-center relative w-max mx-auto h-max my-auto "
+        className="flex justify-center items-center relative w-max mx-auto h-max my-auto z-10"
       >
         {( // Only render the image when it's preloaded
           <div className="flex items-start">

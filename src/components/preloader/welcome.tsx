@@ -30,7 +30,7 @@ function Welcome() {
     <motion.div
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-      className="overflow-hidden fixed inset-0 flex justify-center items-center z-20"
+      className="overflow-hidden fixed inset-0 flex justify-center items-center z-10"
     >
       <motion.svg
         id="Layer_1"

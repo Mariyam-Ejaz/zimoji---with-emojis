@@ -56,7 +56,7 @@ function ComingSoon({ tab }: { tab: number }) {
   }, [index, preloadedImages]);
 
   return (
-    <div className="h-[90px] flex justify-center items-start text-center text-[var(--text-color)]">
+    <div className="h-[90px] flex justify-center items-start text-center text-[var(--text-color)] z-1">
       {tab >= COMINGSOON_TABS.comingsoon && isVisible && currentImage && (
         <img
           className={clsx(COMING_SOON[index].img_css, {
@@ -67,7 +67,7 @@ function ComingSoon({ tab }: { tab: number }) {
           alt="coming soon"
           style={{
             filter: theme === "light" ? "invert(100%)" : "none",
-            display: 'block', // Helps prevent layout shifts
+            // display: 'block', // Helps prevent layout shifts
             willChange: 'transform, opacity',
           }}
         />

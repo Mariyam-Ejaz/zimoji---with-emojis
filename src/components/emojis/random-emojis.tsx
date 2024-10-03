@@ -614,15 +614,13 @@ const RandomEmojis = memo(() => {
   const renderEmojiContainers = () => {
     const offsets = [
       { x: '0%', y: '0%' },
-      { x: '-100%', y: '100%' },
-      { x: '100%', y: '-100%' },
     ];
 
     return offsets.map((offset, idx) => (
       <motion.div
         key={idx}
-        className="pointer-events-none absolute top-0 left-0 w-full h-full overflow-hidden"
-        style={{ transform: `translate(${offset.x}, ${offset.y})` }}
+        className="pointer-events-none absolute top-0 left-0 w-full h-full overflow-hidden "
+        
       >
         {emojis.slice(0, visibleEmojiCount).map((emoji, index) => (
           <motion.img
@@ -636,7 +634,7 @@ const RandomEmojis = memo(() => {
               width: `${emojiSize}px`,
               height: 'auto',
               transform: 'translate(-50%, -50%)',
-              zIndex: activeAnimation === index ? 18 : 0,
+              zIndex: activeAnimation === index || selectedEmojiIndex === index ? 100 : 0,
               willChange: 'transform, opacity',
             }}
             animate={{
