@@ -570,7 +570,7 @@ const RandomEmojis = memo(() => {
           } else {
             setTimeout(() => {
               setAnimateContainer(true); // Start animation after a delay
-            }, 2000);
+            }, 5000);
           }
         };
 
